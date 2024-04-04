@@ -1,4 +1,4 @@
-document.body.addEventListener("mousemove",(e) => {
+/*document.body.addEventListener("mousemove",(e) => {
     let mPosix = e.clientX
     let mPosiy = e.clientY
     let mouseTrail = document.createElement('div')
@@ -8,4 +8,10 @@ document.body.addEventListener("mousemove",(e) => {
         mouseTrail.remove()
     })
     document.body.insertAdjacentElement('beforeend', mouseTrail)
-})
+})*/
+
+let accessIcons = document.querySelectorAll('.accessButton')
+
+function enableAccessibiltyButtons() {
+    
+}

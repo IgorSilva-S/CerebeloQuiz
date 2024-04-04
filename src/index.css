@@ -6,11 +6,11 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
-    color: white;
+    color: black;
   width: 100vw;
   height: 100vh;
-  background-color: #191988;
   overflow: hidden;
+  background-image: linear-gradient(to right, #85b7dc, #97d0e3);
 }
 
 .backdrop {
@@ -47,6 +47,18 @@ body {
   }
 }
 
+.sideStyle {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 400px;
+  height: 100%;
+  background-image: url(./images/sideStyle.png);
+  background-position: center;
+  background-size: cover;
+  z-index: -1;
+}
+
 .titleBar {
   width: 100vw;
   height: 40px;
@@ -59,9 +71,26 @@ body {
   align-items: center;
 }
 
+.titleBar nav ul {
+  display: flex;
+  list-style: none;
+  -webkit-app-region: no-drag;
+}
+
+.titleBar nav ul li {
+  margin: 0 4px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  transition-duration: .2s;
+}
+
+.titleBar nav ul li:hover {
+  background-color: #fff6;
+}
+
 .appIcon {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 0 10px;
   background-image: url(./images/appIcon.png);
   background-size: cover;
@@ -99,6 +128,9 @@ body {
   color: black;
   position: relative;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .progress {
@@ -117,6 +149,8 @@ body {
   left: -60%;
   background-color: #0078d4;
   transition-duration: .2s;
+  border-radius: 0px 4px 4px 0px;
+  overflow: hidden;
 }
 
 .progressAnimation {
@@ -172,4 +206,30 @@ body {
 
 .BStyle4:hover {
   background-color: rgb(149, 255, 175);
+}
+
+.accessButton {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 20px;
+  background-size: cover;
+  background-position: center;
+  display: none;
+}
+
+.BStyle1 .accessButton {
+  background-image: url(./images/buttonAccessibility/1.png);
+}
+
+.BStyle2 .accessButton {
+  background-image: url(./images/buttonAccessibility/2.png);
+}
+
+.BStyle3 .accessButton {
+  background-image: url(./images/buttonAccessibility/3.png);
+}
+
+.BStyle4 .accessButton {
+  background-image: url(./images/buttonAccessibility/4.png);
 }
