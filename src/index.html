@@ -6,14 +6,11 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-      <div class="sideStyle">
-
-      </div>
       <div class="titleBar">
         <div class="appIcon"></div>
         <nav>
           <ul>
-            <li onclick="enableAccessibiltyButtons()">Janela</li>
+            <li id="TBWindow">Janela</li>
             <li>Perguntas</li>
             <li>Sobre</li>
             <li>Ajuda</li>
@@ -21,8 +18,23 @@
           </ul>
         </nav>
     </div>
+    <div class="TBFlyoutContainer">
+      <div class="TBWFlyout" id="TBWF">
+        <div class="option" onclick="enableAccessibiltyButtons()" id="ACSButtonInfo">Desabilitar botões de acessibilidade</div>
+        <div class="option">Recarregar quiz</div>
+        <div class="option">Ativar tela cheia</div>
+      </div>
+    </div>
       <section class="questionSection" id="question1">
-        <p>Questão: Qual é a função principal do cerebelo no sistema nervoso central?</p>
+        <div class="timerContainer">
+          <div class="clock">
+            <div class="pointerCont">
+              <div class="pointer"></div>
+            </div>
+          </div>
+        </div>
+        <h1>Questão <span id="questNum">X</span></h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum ducimus quod facilis, fugiat enim tempora delectus aliquid excepturi consequuntur quasi unde possimus nesciunt accusamus, labore, officiis eum magnam dolore harum.</p>
         <div class="buttonsAlign">
           <button class="BStyle1">
             <div class="accessButton"></div>
@@ -44,4 +56,5 @@
         </div>
       </div>
   </body>
+  <script src="./script.js"></script>
 </html>

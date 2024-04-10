@@ -19,7 +19,7 @@ const createWindow = () => {
     },
     titleBarOverlay: {
       color: '#2f324100',
-      symbolColor: '#191919',
+      symbolColor: '#f0f0ff',
       height: 40
     },
     icon: __dirname + '/images/appIcon.png',

@@ -11,7 +11,34 @@
 })*/
 
 let accessIcons = document.querySelectorAll('.accessButton')
+let TBWindowOpen = false
+let accessIconsToggle = true
 
 function enableAccessibiltyButtons() {
-    
+ if (!accessIconsToggle) {
+    accessIcons.forEach((i) => {
+        i.removeAttribute('style')
+    })
+    accessIconsToggle = true
+    document.getElementById('ACSButtonInfo').innerText = 'Desabilitar botões de acessibilidade'
+ } else {
+    accessIcons.forEach((i) => {
+        i.style.display = 'none'
+    })
+    accessIconsToggle = false
+    document.getElementById('ACSButtonInfo').innerText = 'Habilitar botões de acessibilidade'
+ }
+ TBWindowOpen = false
+ document.getElementById("TBWF").removeAttribute('style')
+
 }
+
+document.getElementById('TBWindow').addEventListener('click', () => {
+    if (!TBWindowOpen) {
+        TBWindowOpen = true
+        document.getElementById("TBWF").style.top = '0'
+    } else {
+        TBWindowOpen = false
+        document.getElementById("TBWF").removeAttribute('style')
+    }
+})
