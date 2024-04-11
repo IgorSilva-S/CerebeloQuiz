@@ -105,14 +105,14 @@ body {
   backdrop-filter: blur(10px);
   border-radius: 8px;
   position: absolute;
-  top: -100%;
+  top: -20%;
   left: 40px;
   display: grid;
   gap: 10px 0;
   align-items: center;
   flex-direction: column;
   padding: 10px;
-  transition: .5s;
+  transition: .3s;
   transform-origin: top;
 }
 
@@ -189,13 +189,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  animation: clockTurn 1s linear infinite;
+  animation: clockTurn 1s infinite;
 }
 
 @keyframes clockTurn {
-  from {
+  0% {
     rotate: 0deg;
-  } to {
+  } 90% {
+    rotate: 360deg;
+  } 100% {
     rotate: 360deg;
   }
 }
