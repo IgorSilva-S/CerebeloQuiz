@@ -13,6 +13,7 @@
 let accessIcons = document.querySelectorAll('.accessButton')
 let TBWindowOpen = false
 let accessIconsToggle = true
+let isClock = true
 
 function enableAccessibiltyButtons() {
  if (!accessIconsToggle) {
@@ -33,10 +34,24 @@ function enableAccessibiltyButtons() {
 
 }
 
+function disableClock() {
+    if (isClock) {
+        document.getElementById('clock').style.display = 'none'
+        isClock = false
+        document.getElementById('DClockInfo').innerText = 'Ativar relógio'
+    } else {
+        document.getElementById('clock').removeAttribute('style')
+        isClock = true
+        document.getElementById('DClockInfo').innerText = 'Desativar relógio'
+    }
+    TBWindowOpen = false
+    document.getElementById("TBWF").removeAttribute('style')
+}
+
 document.getElementById('TBWindow').addEventListener('click', () => {
     if (!TBWindowOpen) {
         TBWindowOpen = true
-        document.getElementById("TBWF").style.top = '0'
+        document.getElementById("TBWF").style.display = 'grid'
     } else {
         TBWindowOpen = false
         document.getElementById("TBWF").removeAttribute('style')

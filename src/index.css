@@ -6,58 +6,17 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
-    color: white;
+    color: #191919;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   /*background-image: linear-gradient(to right, #85b7dc, #97d0e3);*/
+  background-color: #75a7e9;
+}
+
+.dark body {
+  color: white;
   background-color: #101720;
-}
-
-.backdrop {
-  width: 100vw;
-  height: 100vh;
-  backdrop-filter: blur(30px);
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1000;
-}
-
-.mouseTrail {
-  position: absolute;
-  background-color: #6f6fff;
-  border-radius: 100%;
-  animation: mouseTrailAnim 3s ease-in-out;
-}
-
-@keyframes mouseTrailAnim {
-  0% {
-    width: 0;
-    height: 0;
-  }
-
-  50% {
-    width: 150px;
-    height: 150px;
-  }
-
-  100% {
-    width: 0;
-    height: 0;
-  }
-}
-
-.sideStyle {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 400px;
-  height: 100%;
-  background-image: url(./images/sideStyle.png);
-  background-position: center;
-  background-size: cover;
-  z-index: -1;
 }
 
 .titleBar {
@@ -87,25 +46,20 @@ body {
 }
 
 .titleBar nav ul li:hover {
+  background-color: #f0f8ff66;
+}
+
+.dark .titleBar nav ul li:hover {
   background-color: #01122266;
 }
 
-.TBFlyoutContainer {
-  width: 100vw;
-  height: calc(100vh - 40px);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  z-index: 1000;
-}
 
 .TBWFlyout {
-  background-color: #19191977;
+  background-color: #f0f8ff77;
   backdrop-filter: blur(10px);
   border-radius: 8px;
   position: absolute;
-  top: -20%;
+  top: 40px;
   left: 40px;
   display: grid;
   gap: 10px 0;
@@ -114,12 +68,28 @@ body {
   padding: 10px;
   transition: .3s;
   transform-origin: top;
+  z-index: 1001;
+  display: none;
+  animation: openFlyout .3s ease-out;
+}
+
+.dark .TBWFlyout {
+  background-color: #19191977;
+}
+
+@keyframes openFlyout {
+  from {
+    top: 10px;
+    opacity: 0;
+  } to {
+    top: 40px;
+    opacity: 1;
+  }
 }
 
 .TBWFlyout .option {
   width: 100%;
   height: 30px;
-  color: white;
   box-sizing: border-box;
   padding: 0 10px;
   border-radius: 4px;
@@ -130,7 +100,15 @@ body {
   cursor: context-menu;
 }
 
+.dark .TBWFlyout .option {
+  color: white;
+}
+
 .TBWFlyout .option:hover {
+  background-color: #75a7e988;
+}
+
+.dark .TBWFlyout .option:hover {
   background-color: #01122266;
 }
 
@@ -154,16 +132,16 @@ body {
 }
 
 .questionSection h1 {
-  font-size: 30px;
+  font-size: 60px;
 }
 
 .questionSection p {
-  font-size: 25px;
+  font-size: 40px;
   text-align: center;
 }
 
 .timerContainer {
-  width: 300px;
+  width: 100px;
   height: 100px;
   position: fixed;
   top: 60px;
@@ -210,7 +188,7 @@ body {
 
 .buttonsAlign {
   width: 100%;
-  height: 200px;
+  height: 260px;
   padding: 10px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -222,12 +200,17 @@ body {
   border: none;
   border-radius: 4px;
   transition-duration: .5s;
-  color: black;
+  color: white;
   position: relative;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #405869;
+}
+
+.dark .buttonsAlign button {
+  color: black;
   background-color: #85b7dc;
 }
 
@@ -287,6 +270,11 @@ body {
   background-size: cover;
   background-position: center;
   display: block;
+  filter: invert()
+}
+
+.dark .accessButton {
+  filter: none;
 }
 
 .BStyle1 .accessButton {
