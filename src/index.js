@@ -15,8 +15,11 @@ const createWindow = () => {
     width: 800,
     height: 600,
     titleBarStyle: 'hidden',
+    fullscreen: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false,
     },
     titleBarOverlay: {
       color: '#2f324100',
@@ -27,6 +30,13 @@ const createWindow = () => {
   });
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  ipcMain.on('toggleFullScreen', () => {
+    mainWindow.setFullScreen(true)
+  })
+
+  ipcMain.on('untoggleFullScreen', () => {
+    mainWindow.setFullScreen(false)
+  })
 };
 
 /*electron.app.on('ready', () => {
@@ -83,9 +93,6 @@ app.on('window-all-closed', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
- ipcMain.on('restartApp', () => {
-  app.relaunch();
- })
 try {
 	require('electron-reloader')(module);
 } catch {}

@@ -14,9 +14,14 @@ body {
   background-color: #75a7e9;
 }
 
-.dark body {
+.dark {
   color: white;
   background-color: #101720;
+}
+
+.high {
+  color: white;
+  background-color: #000;
 }
 
 .titleBar {
@@ -53,11 +58,16 @@ body {
   background-color: #01122266;
 }
 
+.high .titleBar nav ul li:hover {
+  background-color: #0000ff;
+}
+
 
 .TBWFlyout {
   background-color: #f0f8ff77;
   backdrop-filter: blur(10px);
   border-radius: 8px;
+  min-width: 300px;
   position: absolute;
   top: 40px;
   left: 40px;
@@ -75,6 +85,12 @@ body {
 
 .dark .TBWFlyout {
   background-color: #19191977;
+}
+
+.high .TBWFlyout {
+  background-color: #222;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 @keyframes openFlyout {
@@ -100,8 +116,21 @@ body {
   cursor: context-menu;
 }
 
+.TBWFlyout .option .check {
+  position: absolute;
+  right: 20px;
+}
+
 .dark .TBWFlyout .option {
   color: white;
+}
+
+.high .TBWFlyout .option {
+  border: 1px solid #ccc;
+}
+
+.high .TBWFlyout #themeChanger {
+  color: #777;
 }
 
 .TBWFlyout .option:hover {
@@ -110,6 +139,14 @@ body {
 
 .dark .TBWFlyout .option:hover {
   background-color: #01122266;
+}
+
+.high .TBWFlyout .option:hover {
+  background-color: #0000ff;
+}
+
+.high .TBWFlyout #themeChanger:hover {
+  background-color: transparent;
 }
 
 .appIcon {
@@ -151,6 +188,12 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.high .timerContainer {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 .clock {
@@ -214,8 +257,23 @@ body {
   background-color: #85b7dc;
 }
 
+.high .buttonsAlign button {
+  color: white;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
 .buttonsAlign button:hover {
+  background-color: #212c35;
+}
+
+.dark .buttonsAlign button:hover {
   background-color: #97d0e3;
+}
+
+.high .buttonsAlign button:hover {
+  background-color: #0000ff;
 }
 
 .progress {
