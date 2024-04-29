@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>Quiz!</title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
@@ -14,36 +14,46 @@
           </ul>
         </nav>
     </div>
-    <div class="TBWFlyout" id="TBWF">
+    <div class="flyoutOverlay" id="FOpen" onclick="closeFlyout()"></div>
+    <div class="TBFlyout PrefFlyout" id="TBWF">
       <div class="option" onclick="enableAccessibiltyButtons()" id="ACSButtonInfo">Botões de acessibilidade <p class="check" id="ACSBCheck">&#x2713;</p></div>
-      <div class="option" onclick="disableClock()" id="DClockInfo">Timer <p class="check" id="TCheck">&#x2713;</p></div>
-      <div class="option" onclick="toggleFullScreen()">Tela cheia <p class="check" id="FSCheck">&#x2713;</p></div>
+      <div class="option" onclick="disableClock()" id="DClockInfo">Timer <p class="check" id="TCheck" style="display: none;">&#x2713;</p></div>
+      <div class="option" onclick="toggleFullScreen()" id="FSOption">Tela cheia <p class="check" id="FSCheck">&#x2713;</p></div>
       <div class="option" onclick="highContrastTheme()">Alto Contraste <p class="check" id="HCCheck" style="display: none;">&#x2713;</p></div>
       <div class="option" onclick="changeTheme()" id="themeChanger">Tema escuro <p class="check" id="DTCheck" style="display: none;">&#x2713;</p></div>
+      <div class="option" onclick="devKeysFlyout()" id="OpenDevKeys">Dev Keys <p class="check" id="DevOpen" style="font-size: 25px;">&#8250;</p></div>
       <div class="option">Ajuda</div>
     </div>
+    <div class="TBFlyout DevFlyout" id="DevF">
+      <div class="option" onclick="anotherQuestion()">Trocar questão</div>
+      <div class="option" onclick="correctAnswerBTN()">Realçar botão correto</div>
+    </div>
       <section class="questionSection" id="question1">
-        <div class="timerContainer" id="clock">
+        <div class="timerContainer" id="clock" style="display: none;">
           <div class="clock">
             <div class="pointerCont">
               <div class="pointer"></div>
             </div>
           </div>
         </div>
-        <h1>Questão <span id="questNum">X</span></h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum ducimus quod facilis, fugiat enim tempora delectus aliquid excepturi consequuntur quasi unde possimus nesciunt accusamus, labore, officiis eum magnam dolore harum.</p>
+        <h1>Questão <span id="questNum">0</span></h1>
+        <p id="writeQuestion">Carregando...</p>
         <div class="buttonsAlign">
-          <button class="BStyle1">
+          <button class="BStyle1" id="correct" onclick="anotherQuestion()">
             <div class="accessButton"></div>
+            <p id="a1"></p>
           </button>
-          <button class="BStyle2">
+          <button class="BStyle2" id="wrong1" onclick="wrongAnswer()">
             <div class="accessButton"></div>
+            <p id="a2"></p>
           </button>
-          <button class="BStyle3">
+          <button class="BStyle3" id="wrong2" onclick="wrongAnswer()">
             <div class="accessButton"></div>
+            <p id="a3"></p>
           </button>
-          <button class="BStyle4">
+          <button class="BStyle4" id="wrong3" onclick="wrongAnswer()">
             <div class="accessButton"></div>
+            <p id="a4"></p>
           </button>
         </div>
       </section>
@@ -55,7 +65,14 @@
   </body>
   <script src="./script.js"></script>
   <script>
-    const { ipcRenderer } = require('electron')
+    let isInElectron = true
+    try {
+      var { ipcRenderer } = require('electron')
+    } catch {
+      FSCheck.style.display = 'none'
+      document.getElementById('FSOption').style.display = 'none'
+      isInElectron = false
+    }
     let isFS = true
     function toggleFullScreen() {
       let FSCheck = document.getElementById('FSCheck')
@@ -71,5 +88,7 @@
       TBWindowOpen = false
         document.getElementById("TBWF").removeAttribute('style')
     }
+
+    window.addEventListener('load', anotherQuestion)
   </script>
 </html>

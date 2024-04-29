@@ -62,16 +62,23 @@ body {
   background-color: #0000ff;
 }
 
+.flyoutOverlay {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+}
 
-.TBWFlyout {
+.TBFlyout {
   background-color: #f0f8ff77;
   backdrop-filter: blur(10px);
   border-radius: 8px;
   min-width: 300px;
   position: absolute;
-  top: 40px;
-  left: 40px;
-  display: grid;
+  display: none;
   gap: 10px 0;
   align-items: center;
   flex-direction: column;
@@ -79,15 +86,30 @@ body {
   transition: .3s;
   transform-origin: top;
   z-index: 1001;
-  display: none;
   animation: openFlyout .3s ease-out;
 }
 
-.dark .TBWFlyout {
+.PrefFlyout {
+  top: 40px;
+  left: 40px;
+}
+
+.DevFlyout {
+  display: none;
+  left: 361px;
+  top: 240px;
+  animation: openSubFlyout .3s ease-out;
+}
+
+.high .DevFlyout {
+  left: 343px;
+}
+
+.dark .TBFlyout {
   background-color: #19191977;
 }
 
-.high .TBWFlyout {
+.high .TBFlyout {
   background-color: #222;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -103,7 +125,15 @@ body {
   }
 }
 
-.TBWFlyout .option {
+@keyframes openSubFlyout {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}
+
+.TBFlyout .option {
   width: 100%;
   height: 30px;
   box-sizing: border-box;
@@ -116,36 +146,36 @@ body {
   cursor: context-menu;
 }
 
-.TBWFlyout .option .check {
+.TBFlyout .option .check {
   position: absolute;
   right: 20px;
 }
 
-.dark .TBWFlyout .option {
+.dark .TBFlyout .option {
   color: white;
 }
 
-.high .TBWFlyout .option {
+.high .TBFlyout .option {
   border: 1px solid #ccc;
 }
 
-.high .TBWFlyout #themeChanger {
+.high .TBFlyout #themeChanger {
   color: #777;
 }
 
-.TBWFlyout .option:hover {
+.TBFlyout .option:hover {
   background-color: #75a7e988;
 }
 
-.dark .TBWFlyout .option:hover {
+.dark .TBFlyout .option:hover {
   background-color: #01122266;
 }
 
-.high .TBWFlyout .option:hover {
+.high .TBFlyout .option:hover {
   background-color: #0000ff;
 }
 
-.high .TBWFlyout #themeChanger:hover {
+.high .TBFlyout #themeChanger:hover {
   background-color: transparent;
 }
 
@@ -236,7 +266,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
-  z-index: 1001;
+  z-index: 999;
 }
 
 .buttonsAlign button {
@@ -249,31 +279,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #405869;
+  font-size: 30px;
+  box-sizing: border-box;
+  padding-left: 70px;
+  /*background-color: #405869;*/
 }
 
 .dark .buttonsAlign button {
   color: black;
-  background-color: #85b7dc;
+  /*background-color: #85b7dc;*/
 }
 
 .high .buttonsAlign button {
   color: white;
   background-color: transparent;
-  border: 1px solid #ccc;
   box-sizing: border-box;
-}
-
-.buttonsAlign button:hover {
-  background-color: #212c35;
-}
-
-.dark .buttonsAlign button:hover {
-  background-color: #97d0e3;
-}
-
-.high .buttonsAlign button:hover {
-  background-color: #0000ff;
 }
 
 .progress {
@@ -337,6 +357,86 @@ body {
 
 .BStyle1 .accessButton {
   background-image: url(./images/buttonAccessibility/1.png);
+}
+
+.BStyle1 {
+  background-color: #FF303099;
+  grid-column: 1;
+  grid-row:  1;
+}
+
+.high .BStyle1 {
+  border: 1px solid red;
+}
+
+.BStyle1:hover {
+  background-color: #FF3030;
+}
+
+.high .BStyle1:hover {
+  background-color: #FF0000;
+}
+
+.BStyle2 {
+  background-color: #1C86EE99;
+  grid-column: 2;
+  grid-row:  1;
+}
+
+.high .BStyle2 {
+  border: 1px solid #0000ff
+}
+
+.BStyle2:hover {
+  background-color: #1C86EE;
+}
+
+.high .BStyle2:hover {
+  background-color: #0000ff;
+}
+
+
+.BStyle3 {
+  background-color: #FFD70099;
+  grid-column: 1;
+  grid-row:  2;
+}
+
+.high .BStyle3 {
+  border: 1px solid #ffff00;
+}
+
+.BStyle3:hover {
+  background-color: #FFD700;
+}
+
+.high .BStyle3:hover {
+  background-color: #ffff00;
+  color: black;
+}
+
+.BStyle4 {
+  background-color: #00FF7F99;
+  grid-column: 2;
+  grid-row:  2;
+}
+
+.high .BStyle4 {
+  border: 1px solid #00ff00
+}
+
+.BStyle4:hover {
+  background-color: #00FF7F;
+}
+
+.high .BStyle4:hover {
+  background-color: #00ff00;
+  color: black;
+}
+
+.high .BStyle3:hover .accessButton,
+.high .BStyle4:hover .accessButton {
+  filter: invert()
 }
 
 .BStyle2 .accessButton {
