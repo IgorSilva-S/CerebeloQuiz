@@ -198,8 +198,56 @@ body {
   margin: 0 auto;
 }
 
-.questionSection h1 {
+.imageSection {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.controlButton {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  padding: 10px;
+  background-color:#405869;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  transition-duration: .2s;
+}
+
+.dark .controlButton {
+  color: black;
+  background-color: #85b7dc;
+}
+
+.high .controlButton {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.controlButton:hover {
+  background-color:#283742;
+}
+
+.dark .controlButton:hover {
+  background-color:#9cd4ff;
+}
+
+.high .controlButton:hover {
+  border: 1px solid #ccc;
+  background-color: #0000ff;
+}
+
+.questionSection h1,
+.imageSection h1 {
   font-size: 60px;
+  text-align: center;
 }
 
 .questionSection p {
@@ -310,19 +358,30 @@ body {
   height: 100%;
   position: absolute;
   left: -100%;
-  background-color: #0078d4;
+  background-color: #27408B;
   transition-duration: .2s;
-  border-radius: 0px 4px 4px 0px;
   overflow: hidden;
 }
 
+.dark .progressValue {
+  background-color: #4876FF;
+}
+
+.high .progressValue {
+  background-color: #00BFFF;
+}
+
 .progressAnimation {
-  background-image: linear-gradient(to right, #0000, aliceblue, #0000);
+  background-image: linear-gradient(to right, #0000, #f0f8ff66);
   width: 120px;
   height: 20px;
   position: absolute;
   right: 0;
   animation: animPB 5s linear infinite;
+}
+
+.high .progressAnimation {
+  background-image: linear-gradient(to right, #0000, #0000);
 }
 
 @keyframes animPB {

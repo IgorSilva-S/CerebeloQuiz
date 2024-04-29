@@ -120,6 +120,7 @@ function highContrastTheme() {
 let answered = []
 let counter = 0
 let totalPoints = 6
+let leftPB = 0
 let questions = ["Quais são as consequências de danos no cerebelo?", "Qual é a composição do cerebelo?", "O que é o Vermis?", "Do que é composto o líquido cinzento?", "Qual a função do cerebelo?", "Qual a função do líquido branco?"]
 
 function anotherQuestion() {
@@ -140,6 +141,7 @@ function anotherQuestion() {
             isChoosed = true
             isFinished = true
         }
+
 
         if (isChoosed && !isFinished) {
             let qOfTime
@@ -183,6 +185,12 @@ function anotherQuestion() {
             } while (theWrong != 3);
         }
     } while (!isChoosed);
+    if (counter > 1) {
+        leftPB = leftPB + 20
+        document.getElementById('progress').style.left = `-${100 - leftPB}%`
+    }
+    document.getElementById('imgSection').removeAttribute('style')
+    document.getElementById('questions').style.display = 'none'
 }
 
 let answers1 = ["Falta de coordenação motora e equilíbrio", "Aumento da capacidade de coordenação motora", "Redução da pressão arterial", "Chance de desenvolver esclerose lateral amiotrófica"]
@@ -200,6 +208,11 @@ let answers6 = ["É responsável pelas vias de comunicação entre o SNC e os lo
 function wrongAnswer() {
     totalPoints--
     anotherQuestion()
+}
+
+function goToQuestion() {
+    document.getElementById('imgSection').style.display = 'none'
+    document.getElementById('questions').removeAttribute('style')
 }
 
 // Dev Keys
