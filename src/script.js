@@ -31,6 +31,9 @@ function enableAccessibiltyButtons() {
     isDevOpen = false
     document.getElementById("TBWF").removeAttribute('style')
     document.getElementById("DevF").removeAttribute('style')
+    if (!isInElectron) {
+        document.getElementById('DevF').style.top = '200px'
+    }
     document.getElementById('FOpen').removeAttribute('style')
 
 }
@@ -49,6 +52,9 @@ function disableClock() {
     isDevOpen = false
     document.getElementById("TBWF").removeAttribute('style')
     document.getElementById("DevF").removeAttribute('style')
+    if (!isInElectron) {
+        document.getElementById('DevF').style.top = '200px'
+    }
     document.getElementById('FOpen').removeAttribute('style')
 }
 
@@ -62,6 +68,9 @@ document.getElementById('TBWindow').addEventListener('click', () => {
         isDevOpen = false
         document.getElementById("TBWF").removeAttribute('style')
         document.getElementById("DevF").removeAttribute('style')
+        if (!isInElectron) {
+            document.getElementById('DevF').style.top = '200px'
+        }
         document.getElementById('FOpen').removeAttribute('style')
     }
 })
@@ -72,6 +81,9 @@ function closeFlyout() {
     document.getElementById("TBWF").removeAttribute('style')
     document.getElementById("DevF").removeAttribute('style')
     document.getElementById('FOpen').removeAttribute('style')
+    if (!isInElectron) {
+        document.getElementById('DevF').style.top = '200px'
+    }
 }
 
 function changeTheme() {
@@ -90,6 +102,9 @@ function changeTheme() {
         isDevOpen = false
         document.getElementById("TBWF").removeAttribute('style')
         document.getElementById("DevF").removeAttribute('style')
+        if (!isInElectron) {
+            document.getElementById('DevF').style.top = '200px'
+        }
         document.getElementById('FOpen').removeAttribute('style')
     }
 }
@@ -112,6 +127,9 @@ function highContrastTheme() {
     isDevOpen = false
     document.getElementById("TBWF").removeAttribute('style')
     document.getElementById("DevF").removeAttribute('style')
+    if (!isInElectron) {
+        document.getElementById('DevF').style.top = '200px'
+    }
     document.getElementById('FOpen').removeAttribute('style')
 }
 
@@ -191,6 +209,13 @@ function anotherQuestion() {
     }
     document.getElementById('imgSection').removeAttribute('style')
     document.getElementById('questions').style.display = 'none'
+    let screen = window.screen.width
+    if (screen <= 550) {
+        document.getElementById('a1').innerText = ''
+        document.getElementById('a2').innerText = ''
+        document.getElementById('a3').innerText = ''
+        document.getElementById('a4').innerText = ''
+    }
 }
 
 let answers1 = ["Falta de coordenação motora e equilíbrio", "Aumento da capacidade de coordenação motora", "Redução da pressão arterial", "Chance de desenvolver esclerose lateral amiotrófica"]
@@ -206,8 +231,24 @@ let answers5 = ["Dar equilíbrio", "Pensar", "Gerar emoções", "Responsável pe
 let answers6 = ["É responsável pelas vias de comunicação entre o SNC e os locais externos do SNC", "Proteger o cerebelo", "Produz os glóbulos brancos presentes em todo corpo humano", "Distribui os nutrientes para o cérebro"]
 
 function wrongAnswer() {
-    totalPoints--
-    anotherQuestion()
+    let screen = window.screen.width
+    if (screen <= 550) {
+
+    }
+    else {
+        totalPoints--
+        anotherQuestion()
+    }
+}
+
+function correctAnswer() {
+    let screen = window.screen.width
+    if (screen <= 550) {
+
+    }
+    else {
+        anotherQuestion()
+    }
 }
 
 function goToQuestion() {
@@ -223,6 +264,9 @@ function devKeysFlyout() {
     } else {
         isDevOpen = false
         document.getElementById('DevF').removeAttribute('style')
+        if (!isInElectron) {
+            document.getElementById('DevF').style.top = '200px'
+        }
     }
 }
 
