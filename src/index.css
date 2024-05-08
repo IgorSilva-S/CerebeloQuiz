@@ -14,15 +14,30 @@ body {
   background-color: #75a7e9;
 }
 
+::selection {
+  color: white;
+  background: #101720;
+  }
+
 .dark {
   color: white;
   background-color: #101720;
 }
 
+.dark ::selection {
+  color: #191919;
+  background: #75a7e9;
+  }
+
 .high {
   color: white;
   background-color: #000;
 }
+
+.high ::selection {
+  color: black;
+  background: white;
+  }
 
 .titleBar {
   width: 100vw;
@@ -34,6 +49,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  z-index: 1002;
 }
 
 .titleBar nav ul {
@@ -68,7 +84,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1001;
   display: none;
 }
 
@@ -186,6 +202,64 @@ body {
   background-image: url(./images/appIcon.png);
   background-size: cover;
   background-position: center;
+}
+
+.homeMenu,
+.endPage {
+  width: 100vw;
+  height:100vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  text-wrap: wrap;
+}
+
+.homeMenu h1,
+.endPage h1 {
+  font-size: 50px;
+}
+
+.homeMenu .buttonsAlign {
+  width: 30%;
+  height: auto;
+  display: flex;
+  
+}
+
+.homeMenu .buttonsAlign button {
+  text-align: center;
+  padding: 15px;
+  background-color:#405869;
+  border: none;
+  color: white;
+  transition-duration: .2s;
+  flex-grow: 1;
+}
+
+.homeMenu .buttonsAlign button:hover {
+  background-color:#283742;
+}
+
+.dark .homeMenu .buttonsAlign button {
+  color: black;
+  background-color: #85b7dc;
+}
+
+.dark .homeMenu .buttonsAlign button:hover {
+  background-color:#9cd4ff;
+}
+
+.high .homeMenu .buttonsAlign button {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.high .homeMenu .buttonsAlign button:hover {
+  border: 1px solid #ccc;
+  background-color: #0000ff;
 }
 
 .questionSection {
@@ -511,6 +585,96 @@ body {
   background-image: url(./images/buttonAccessibility/4.png);
 }
 
+/*Mobile response*/
+
+.answerOverlay {
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #f0f0f088;
+}
+
+.dark .answerOverlay {
+  background-color: #19191988;
+}
+
+.high .answerOverlay {
+  background-color: #0000;
+}
+
+.popup {
+  width: 90vw;
+  border-radius: 8px;
+  background-color: #f0f8ffcc;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  text-wrap: wrap;
+  box-sizing: border-box;
+  gap: 50px 0;
+  padding: 20px;
+  font-size: 20px;
+  animation: popupAppear .3s ease-out;
+  position: absolute;
+  bottom: 20px;
+  z-index: 1001;
+}
+
+@keyframes popupAppear {
+  from {
+    bottom: -10px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 20px;
+    opacity: 1;
+  }
+}
+
+.dark .popup {
+  background-color: #393939cc;
+}
+
+.high .popup {
+  border: 1px solid #ccc;
+  background-color: #191919;
+}
+
+.popupBAlign {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.popupBAlign button {
+  width: 40%;
+  font-size: 30px;
+  padding: 10px;
+  background-color:#405869;
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
+.dark .popupBAlign button {
+  color: black;
+  background-color: #85b7dc;
+}
+
+.high .popupBAlign button {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
 @media (max-width: 550px) {
   .buttonsAlign {
     grid-template-columns: 90px 90px;
@@ -523,4 +687,7 @@ body {
     color: #0000;
   }
 
+  .DevFlyout {
+    left: 40px;
+  }
 }

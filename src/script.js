@@ -34,6 +34,10 @@ function enableAccessibiltyButtons() {
     if (!isInElectron) {
         document.getElementById('DevF').style.top = '200px'
     }
+    let screen = window.screen.width
+    if (screen <= 550) {
+      document.getElementById('DevF').style.top = '300px'
+    }
     document.getElementById('FOpen').removeAttribute('style')
 
 }
@@ -55,6 +59,10 @@ function disableClock() {
     if (!isInElectron) {
         document.getElementById('DevF').style.top = '200px'
     }
+    let screen = window.screen.width
+    if (screen <= 550) {
+      document.getElementById('DevF').style.top = '300px'
+    }
     document.getElementById('FOpen').removeAttribute('style')
 }
 
@@ -63,6 +71,10 @@ document.getElementById('TBWindow').addEventListener('click', () => {
         TBWindowOpen = true
         document.getElementById("TBWF").style.display = 'grid'
         document.getElementById('FOpen').style.display = 'block'
+        let screen = window.screen.width
+        if (screen <= 550) {
+          document.getElementById('DevF').style.top = '300px'
+        }
     } else {
         TBWindowOpen = false
         isDevOpen = false
@@ -70,6 +82,10 @@ document.getElementById('TBWindow').addEventListener('click', () => {
         document.getElementById("DevF").removeAttribute('style')
         if (!isInElectron) {
             document.getElementById('DevF').style.top = '200px'
+        }
+        let screen = window.screen.width
+        if (screen <= 550) {
+          document.getElementById('DevF').style.top = '300px'
         }
         document.getElementById('FOpen').removeAttribute('style')
     }
@@ -83,6 +99,10 @@ function closeFlyout() {
     document.getElementById('FOpen').removeAttribute('style')
     if (!isInElectron) {
         document.getElementById('DevF').style.top = '200px'
+    }
+    let screen = window.screen.width
+    if (screen <= 550) {
+      document.getElementById('DevF').style.top = '300px'
     }
 }
 
@@ -104,6 +124,10 @@ function changeTheme() {
         document.getElementById("DevF").removeAttribute('style')
         if (!isInElectron) {
             document.getElementById('DevF').style.top = '200px'
+        }
+        let screen = window.screen.width
+        if (screen <= 550) {
+          document.getElementById('DevF').style.top = '300px'
         }
         document.getElementById('FOpen').removeAttribute('style')
     }
@@ -130,10 +154,19 @@ function highContrastTheme() {
     if (!isInElectron) {
         document.getElementById('DevF').style.top = '200px'
     }
+    let screen = window.screen.width
+    if (screen <= 550) {
+      document.getElementById('DevF').style.top = '300px'
+    }
     document.getElementById('FOpen').removeAttribute('style')
 }
 
 // Quiz Script
+
+function startQuiz() {
+    document.getElementById('menuHome').style.display = 'none'
+    anotherQuestion()
+}
 
 let answered = []
 let counter = 0
@@ -145,7 +178,7 @@ function anotherQuestion() {
     let isChoosed = false
     let isFinished = false
     do {
-        let actualQuestion = Math.floor(Math.random() * 6)
+        actualQuestion = Math.floor(Math.random() * 6)
         let questionAnswer = []
         let repeatQuestion = 1
         if (answered[0] != actualQuestion && answered[1] != actualQuestion && answered[2] != actualQuestion && answered[3] != actualQuestion && answered[4] != actualQuestion && answered[5] != actualQuestion) {
@@ -186,9 +219,13 @@ function anotherQuestion() {
                     break;
             }
             document.getElementById('a1').innerText = qOfTime[0]
+            document.getElementById('cAnswer').innerText = qOfTime[0]
             document.getElementById('a2').innerText = qOfTime[1]
+            document.getElementById('w1Answer').innerText = qOfTime[1]
             document.getElementById('a3').innerText = qOfTime[2]
+            document.getElementById('w2Answer').innerText = qOfTime[2]
             document.getElementById('a4').innerText = qOfTime[3]
+            document.getElementById('w3Answer').innerText = qOfTime[3]
             let randCorrect = Math.floor(Math.random() * 4 + 1)
             randButton.push(randCorrect)
             document.getElementById('correct').className = `BStyle${randCorrect}`
@@ -230,10 +267,16 @@ let answers5 = ["Dar equilíbrio", "Pensar", "Gerar emoções", "Responsável pe
 
 let answers6 = ["É responsável pelas vias de comunicação entre o SNC e os locais externos do SNC", "Proteger o cerebelo", "Produz os glóbulos brancos presentes em todo corpo humano", "Distribui os nutrientes para o cérebro"]
 
-function wrongAnswer() {
+function wrongAnswer(id) {
     let screen = window.screen.width
     if (screen <= 550) {
-
+        if (id == 'wrong1') {
+            document.getElementById('w1Popup').style.display = 'flex'
+        } else if (id == 'wrong2') {
+            document.getElementById('w2Popup').style.display = 'flex'
+        } else if (id == 'wrong3') {
+            document.getElementById('w3Popup').style.display = 'flex'
+        }
     }
     else {
         totalPoints--
@@ -244,7 +287,7 @@ function wrongAnswer() {
 function correctAnswer() {
     let screen = window.screen.width
     if (screen <= 550) {
-
+        document.getElementById('correctPopup').style.display = 'flex'
     }
     else {
         anotherQuestion()
@@ -254,6 +297,25 @@ function correctAnswer() {
 function goToQuestion() {
     document.getElementById('imgSection').style.display = 'none'
     document.getElementById('questions').removeAttribute('style')
+}
+
+// Mobile Script
+function closePopup() {
+    document.getElementById('correctPopup').removeAttribute('style')
+    document.getElementById('w1Popup').removeAttribute('style')
+    document.getElementById('w2Popup').removeAttribute('style')
+    document.getElementById('w3Popup').removeAttribute('style')
+}
+
+function popupCorrectAnswer() {
+    closePopup()
+    anotherQuestion()
+}
+
+function popupWrongAnswer() {
+    closePopup()
+    totalPoints--
+    anotherQuestion()
 }
 
 // Dev Keys
@@ -267,6 +329,10 @@ function devKeysFlyout() {
         if (!isInElectron) {
             document.getElementById('DevF').style.top = '200px'
         }
+        let screen = window.screen.width
+        if (screen <= 550) {
+          document.getElementById('DevF').style.top = '300px'
+        }
     }
 }
 
@@ -274,5 +340,44 @@ function correctAnswerBTN() {
     document.getElementById('correct').style.boxShadow = '0 0 20px #000'
     if (darkTheme || highContrast) {
         document.getElementById('correct').style.boxShadow = '0 0 20px #f0f8ff'
+    }
+}
+
+function reloadQuestion() {
+    let qOfTime
+    switch (actualQuestion) {
+        case 0:
+            qOfTime = answers1
+            break;
+        case 1:
+            qOfTime = answers2
+            break;
+        case 2:
+            qOfTime = answers3
+            break;
+        case 3:
+            qOfTime = answers4
+            break;
+        case 4:
+            qOfTime = answers5
+            break;
+        case 5:
+            qOfTime = answers6
+            break;
+    }
+    document.getElementById('a1').innerText = qOfTime[0]
+    document.getElementById('cAnswer').innerText = qOfTime[0]
+    document.getElementById('a2').innerText = qOfTime[1]
+    document.getElementById('w1Answer').innerText = qOfTime[1]
+    document.getElementById('a3').innerText = qOfTime[2]
+    document.getElementById('w2Answer').innerText = qOfTime[2]
+    document.getElementById('a4').innerText = qOfTime[3]
+    document.getElementById('w3Answer').innerText = qOfTime[3]
+    let screen = window.screen.width
+    if (screen <= 550) {
+        document.getElementById('a1').innerText = ''
+        document.getElementById('a2').innerText = ''
+        document.getElementById('a3').innerText = ''
+        document.getElementById('a4').innerText = ''
     }
 }
