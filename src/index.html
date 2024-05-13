@@ -6,7 +6,45 @@
   <title>Quiz!</title>
   <link rel="stylesheet" href="index.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="images/appIcon.png" type="image/x-icon">
 </head>
+
+<!--Internal script (To Electron use)-->
+<script>
+  let isInElectron = true
+  try {
+    var { ipcRenderer } = require('electron')
+  } catch {
+    FSCheck.style.display = 'none'
+    document.getElementById('FSOption').style.display = 'none'
+    document.getElementById('closeElectron').style.display = 'none'
+    document.getElementById('DevF').style.top = '200px'
+    isInElectron = false
+  }
+  let isFS = true
+  function toggleFullScreen() {
+    let FSCheck = document.getElementById('FSCheck')
+    if (isFS) {
+      ipcRenderer.send('untoggleFullScreen')
+      FSCheck.style.display = 'none'
+      isFS = false
+    } else {
+      ipcRenderer.send('toggleFullScreen')
+      FSCheck.removeAttribute('style')
+      isFS = true
+    }
+    TBWindowOpen = false
+  isDevOpen = false
+  document.getElementById("TBWF").removeAttribute('style')
+  document.getElementById("DevF").removeAttribute('style')
+  document.getElementById('FOpen').removeAttribute('style')
+  }
+
+  function closeWindow() {
+    ipcRenderer.send('closeQuiz')
+  }
+
+</script>
 
 <body>
 
@@ -26,9 +64,6 @@
     <div class="option " onclick="enableAccessibiltyButtons()" id="ACSButtonInfo">Botões de acessibilidade <p
         class="check" id="ACSBCheck">&#x2713;</p>
     </div>
-    <div class="option" onclick="disableClock()" id="DClockInfo">Timer <p class="check" id="TCheck"
-        style="display: none;">&#x2713;</p>
-    </div>
     <div class="option" onclick="toggleFullScreen()" id="FSOption">Tela cheia <p class="check" id="FSCheck">&#x2713;</p>
     </div>
     <div class="option" onclick="highContrastTheme()">Alto Contraste <p class="check" id="HCCheck"
@@ -42,10 +77,13 @@
     </div>
     <div class="option" onclick="closeWindow()" id="closeElectron">Fechar janela</div>
   </div>
+  
   <div class="TBFlyout DevFlyout" id="DevF">
     <div class="option" onclick="anotherQuestion()">Trocar questão</div>
     <div class="option" onclick="correctAnswerBTN()">Realçar botão correto</div>
     <div class="option" onclick="reloadQuestion()">Recarregar questão</div>
+    <div class="option" onclick="disableClock()">Desligar o Timer</div>
+    <div class="option" onclick="deskToMobile()">Habilitar/Desabilitar modelo Mobile no Desktop</div>
   </div>
 
   <!--Home Menu-->
@@ -58,15 +96,6 @@
 
   <!--Question section-->
   <section class="questionSection" id="questions" style="display: none;">
-
-    <!--Clock-->
-    <div class="timerContainer" id="clock" style="display: none;">
-      <div class="clock">
-        <div class="pointerCont">
-          <div class="pointer"></div>
-        </div>
-      </div>
-    </div>
 
     <!--Question-->
     <h1>Questão <span id="questNum">0</span></h1>
@@ -142,20 +171,30 @@
 
   <!--Image Section-->
   <section class="imageSection" id="imgSection" style="display: none">
-    <h1>Olhe a imagem para responder a questão</h1>
+    <h1>Observe a imagem para<br>responder a questão</h1>
+    <!--Img Normal Size: 1066x1600 -->
+    <!--1920x1080 display Size: 533x800-->
+    <img src="" alt="" class="helpImage" id="hImg">
     <button class="controlButton" onclick="goToQuestion()">Ir para a questão</button>
   </section>
 
   <!--End Section-->
-  <section class="endPage" style="display: none">
+  <section class="endPage" id="endPage" style="display: none;">
     <h1>Parabéns! Você terminou o quiz!</h1>
-    <h2>Seus acertos foram de: <span>N</span>/6</h2>
+    <h2>Seus acertos foram de: <span id="numCorrect">N</span>/6</h2>
+    <button onclick="restartQuiz()">Tentar novamente</button>
   </section>
 
   <!--Progress bar-->
-  <div class="progress">
+  <div class="progress" id="quizProgress">
     <div class="progressValue" id="progress">
-      <div class="progressAnimation"></div>
+      <div class="progressAnimation" id="PBAnim"></div>
+    </div>
+  </div>
+
+  <!--Timer Bar-->
+  <div class="progressTimer" id="timer">
+    <div class="progressValueTimer" id="timer">
     </div>
   </div>
 
@@ -164,46 +203,5 @@
 <!--External script-->
 <script src="./script.js"></script>
 
-<!--Internal script (To Electron use)-->
-<script>
-  let isInElectron = true
-  try {
-    var { ipcRenderer } = require('electron')
-  } catch {
-    FSCheck.style.display = 'none'
-    document.getElementById('FSOption').style.display = 'none'
-    document.getElementById('closeElectron').style.display = 'none'
-    document.getElementById('DevF').style.top = '200px'
-    let screen = window.screen.width
-    if (screen <= 550) {
-      document.getElementById('DevF').style.top = '300px'
-    }
-    isInElectron = false
-  }
-  let isFS = true
-  function toggleFullScreen() {
-    let FSCheck = document.getElementById('FSCheck')
-    if (isFS) {
-      ipcRenderer.send('untoggleFullScreen')
-      FSCheck.style.display = 'none'
-      isFS = false
-    } else {
-      ipcRenderer.send('toggleFullScreen')
-      FSCheck.removeAttribute('style')
-      isFS = true
-    }
-    TBWindowOpen = false
-    isDevOpen = false
-    document.getElementById("TBWF").removeAttribute('style')
-    document.getElementById("DevF").removeAttribute('style')
-    document.getElementById('FOpen').removeAttribute('style')
-  }
-
-  function closeWindow() {
-    ipcRenderer.send('closeQuiz')
-  }
-
-  //window.addEventListener('load', anotherQuestion)
-</script>
 
 </html>

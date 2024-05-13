@@ -52,6 +52,11 @@ body {
   z-index: 1002;
 }
 
+.titleBar a {
+  color: yellow;
+  text-decoration: none;
+}
+
 .titleBar nav ul {
   display: flex;
   list-style: none;
@@ -113,7 +118,7 @@ body {
 .DevFlyout {
   display: none;
   left: 361px;
-  top: 240px;
+  top: 130px;
   animation: openSubFlyout .3s ease-out;
 }
 
@@ -122,7 +127,7 @@ body {
 }
 
 .dark .TBFlyout {
-  background-color: #19191977;
+  background-color: #191919cc;
 }
 
 .high .TBFlyout {
@@ -204,6 +209,10 @@ body {
   background-position: center;
 }
 
+.high .appIcon {
+  filter: contrast(10000%);
+}
+
 .homeMenu,
 .endPage {
   width: 100vw;
@@ -262,6 +271,40 @@ body {
   background-color: #0000ff;
 }
 
+.endPage button {
+  text-align: center;
+  padding: 15px;
+  background-color:#405869;
+  border: none;
+  color: white;
+  transition-duration: .2s;
+  border-radius: 4px;
+}
+
+.endPage  button:hover {
+  background-color:#283742;
+}
+
+.dark .endPage  button {
+  color: black;
+  background-color: #85b7dc;
+}
+
+.dark .endPage  button:hover {
+  background-color:#9cd4ff;
+}
+
+.high .endPage  button {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.high .endPage  button:hover {
+  border: 1px solid #ccc;
+  background-color: #0000ff;
+}
+
 .questionSection {
   width: 80vw;
   height: 100vh;
@@ -273,13 +316,18 @@ body {
 }
 
 .imageSection {
-  width: 80vw;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  flex-direction: column;
   margin: 0 auto;
+}
+
+.helpImage {
+  width: 533px;
+  height: 800px;
+  border-radius: 8px;
 }
 
 .controlButton {
@@ -329,57 +377,6 @@ body {
   text-align: center;
 }
 
-.timerContainer {
-  width: 100px;
-  height: 100px;
-  position: fixed;
-  top: 60px;
-  left: 60px;
-  background-color: #23395d;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.high .timerContainer {
-  background-color: transparent;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-.clock {
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-  box-sizing: border-box;
-  border: 1px solid #f0f0ff
-}
-
-.clock .pointerCont {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  animation: clockTurn 1s infinite;
-}
-
-@keyframes clockTurn {
-  0% {
-    rotate: 0deg;
-  } 90% {
-    rotate: 360deg;
-  } 100% {
-    rotate: 360deg;
-  }
-}
-
-.clock .pointerCont .pointer {
-  width: 4px;
-  height: 39px;
-  background-color: #f0f0ff;
-}
 
 .buttonsAlign {
   width: 100%;
@@ -428,6 +425,32 @@ body {
   overflow: hidden;
 }
 
+.progressTimer {
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  overflow: hidden;
+  background-color: #19191922;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark .progressTimer {
+  background-color: #f0f8ff22;
+}
+
+.high .progressTimer {
+  background-color: white;
+}
+
+
+.high .progressTimer p {
+  color: black;
+}
+
 .progressValue {
   width: 100%;
   height: 100%;
@@ -437,6 +460,45 @@ body {
   transition-duration: .2s;
   overflow: hidden;
 }
+
+.progressValueTimer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: -100%;
+  transition-duration: .2s;
+  overflow: hidden;
+  animation: timeRunning 30s linear;
+}
+
+@keyframes timeRunning {
+  0% {
+    left: 0;
+    background-color: #00FA9A;
+  }
+
+  50% {
+    left: -50%;
+    background-color: #FFD700;
+  }
+
+  85% {
+    left: -85%;
+    background-color: #DC143C;
+  }
+
+  100% {
+    left: -100%;
+    background-color: #8B0000;
+  }
+}
+
+/*Timer colors:
+  #00FA9A - Medium Spring Green - Okay
+	#FFD700 - Gold - Alert!
+  #DC143C - Crimson - Ending!!
+  #8B0000 - Dark Red - Ended
+*/
 
 .dark .progressValue {
   background-color: #4876FF;
@@ -622,18 +684,18 @@ body {
   font-size: 20px;
   animation: popupAppear .3s ease-out;
   position: absolute;
-  bottom: 20px;
+  bottom: 100px;
   z-index: 1001;
 }
 
 @keyframes popupAppear {
   from {
-    bottom: -10px;
+    bottom: 70px;
     opacity: 0;
   }
 
   to {
-    bottom: 20px;
+    bottom: 100px;
     opacity: 1;
   }
 }
@@ -675,6 +737,23 @@ body {
   background-color: transparent;
 }
 
+@media (max-height: 768px) {
+  .helpImage {
+    width: 266px;
+    height: 400px;
+  }
+
+  .progress {
+    bottom: auto;
+    top: 0;
+    height: 40px;
+  }
+
+  .progressAnimation {
+    height: 40px;
+  }
+}
+
 @media (max-width: 550px) {
   .buttonsAlign {
     grid-template-columns: 90px 90px;
@@ -689,5 +768,29 @@ body {
 
   .DevFlyout {
     left: 40px;
+  }
+
+  .progress {
+    bottom: auto;
+    top: 0;
+    height: 40px;
+  }
+
+  .progressAnimation {
+    height: 40px;
+  }
+
+  .imageSection {
+    flex-direction: column;
+  }
+
+  .imageSection h1 {
+    display: none;
+  }
+
+  .helpImage {
+    width: 80vw;
+    height: 80vh;
+    border-radius: 8px;
   }
 }
